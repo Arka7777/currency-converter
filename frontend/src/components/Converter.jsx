@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CurrencySelector from "./CurrencySelector";
 import HistoricalChart from "./HistoricalChart";
 
-// ✅ Only currencies supported by Frankfurter (historical API)
+
 const countryList = {
   AUD: "AU",
   BGN: "BG",
@@ -68,7 +68,7 @@ export default function CurrencyConverter() {
       const converted = (amount * rate).toFixed(2);
       setExchangeRate(converted);
 
-      // ✅ Update history (keep max 5)
+//history part 
       if (countryList[fromCurrency] && countryList[toCurrency]) {
         setHistory((prev) => {
           const newEntry = { fromCurrency, toCurrency, amount, result: converted };
@@ -103,13 +103,13 @@ export default function CurrencyConverter() {
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Left: Converter */}
+       
         <div className="p-6 bg-white rounded-2xl shadow-xl">
           <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
             Currency Converter
           </h2>
 
-          {/* Currency selectors */}
+         
           <div className="flex items-center gap-4 mb-4">
             <div className="dropdown flex items-center gap-2">
               <img
@@ -180,7 +180,6 @@ export default function CurrencyConverter() {
             )}
           </p>
 
-          {/* ✅ History Section */}
           {history.length > 0 && (
             <div className="mt-6">
               <h3 className="text-xl font-semibold mb-2">Last 5 Conversions</h3>
@@ -212,7 +211,7 @@ export default function CurrencyConverter() {
           )}
         </div>
 
-        {/* Right: Graph */}
+      
         <div className="p-6 bg-white rounded-2xl shadow-xl">
           <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
             Past 30 Days Fluctuations
