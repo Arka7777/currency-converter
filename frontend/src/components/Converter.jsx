@@ -8,7 +8,7 @@ import CurrencyInfo from "./CurrencyInfo";
 import ExportHistory from "./ExportHistory";
 // import ThemeToggle from "./ThemeToggle";
 
-// ✅ Only currencies supported by Frankfurter (historical API)
+
 const countryList = {
   AUD: "AU",
   BGN: "BG",
@@ -104,7 +104,7 @@ export default function CurrencyConverter() {
       setExchangeRate(converted);
       setLastUpdated(new Date().toLocaleTimeString());
 
-      // ✅ Update history (keep max 5)
+//history part 
       if (countryList[fromCurrency] && countryList[toCurrency]) {
         setHistory((prev) => {
           const newEntry = { 
@@ -197,26 +197,24 @@ export default function CurrencyConverter() {
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left: Converter */}
-        <div className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl">
+        <div className="p-6 bg-white rounded-2xl shadow-xl">
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+            Currency Converter
+          </h2>
+
           {/* Currency selectors */}
-          <div className="flex items-center gap-4 mb-6">
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                From
-              </label>
-              <div className="flex items-center gap-2 p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700">
-                <img
-                  src={`https://flagsapi.com/${countryList[fromCurrency]}/flat/64.png`}
-                  alt="flag"
-                  className="w-6 h-6 rounded-sm"
-                />
-                <CurrencySelector
-                  currencies={Object.keys(countryList)}
-                  selected={fromCurrency}
-                  onChange={setFromCurrency}
-                  ariaLabel="Select source currency"
-                />
-              </div>
+          <div className="flex items-center gap-4 mb-4">
+            <div className="dropdown flex items-center gap-2">
+              <img
+                src={`https://flagsapi.com/${countryList[fromCurrency]}/flat/64.png`}
+                alt="flag"
+                className="w-8 h-8"
+              />
+              <CurrencySelector
+                currencies={Object.keys(countryList)}
+                selected={fromCurrency}
+                onChange={setFromCurrency}
+              />
             </div>
 
             <button
@@ -342,7 +340,6 @@ export default function CurrencyConverter() {
           <CurrencyInfo currencyCode={toCurrency} />
 
 
-          {/* ✅ History Section */}
           {history.length > 0 && (
             <div className="mt-6">
               <div className="flex justify-between items-center mb-3">
@@ -404,9 +401,9 @@ export default function CurrencyConverter() {
         </div>
 
         {/* Right: Graph */}
-        <div className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl">
-          <h2 className="text-2xl font-bold text-center mb-6 text-gray-800 dark:text-white">
-            📈 Exchange Rate History
+        <div className="p-6 bg-white rounded-2xl shadow-xl">
+          <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+            Past 30 Days Fluctuations
           </h2>
           
           <div className="mb-4 flex items-center justify-center gap-2">
